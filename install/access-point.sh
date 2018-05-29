@@ -1,74 +1,57 @@
 #!/bin/bash
-#
-# This version uses September 2017 august stretch image, please use this image
-#
 
-if [ "$EUID" -ne 0 ]
-	then echo "Must be root"
-	exit
-fi
+touch /etc/udev/rules.d/70-persistent-net.rules
 
-if [[ $# -lt 1 ]]; 
-	then echo "You need to pass a password!"
-	echo "Usage:"
-	echo "sudo $0 yourChosenPassword [apName]"
-	exit
-fi
+MAC=$(cat /sys/class/net/wlan0/address)
 
-APPASS="$1"
-APSSID="rPi3"
+tee -a /etc/udev/rules.d/70-persistent-net.rules << END
+SUBSYSTEM=="ieee80211", ACTION=="add|change", ATTR{macaddress}=="$MAC", KERNEL=="phy0", 
+  RUN+="/sbin/iw phy phy0 interface add ap0 type __ap", 
+  RUN+="/bin/ip link set ap0 address $MAC
+END
 
-if [[ $# -eq 2 ]]; then
-	APSSID=$2
-fi
+apt-get install -y dnsmasq hostapd
 
-apt-get remove --purge hostapd -yqq
-apt-get update -yqq
-apt-get install hostapd dnsmasq -yqq
+tee -a /etc/dnsmasq.conf << END
+interface=lo,ap0
+no-dhcp-interface=lo,wlan0
+bind-interfaces
+server=8.8.8.8
+domain-needed
+bogus-priv
+dhcp-range=192.168.10.50,192.168.10.150,12h
+END
 
-cat > /etc/dnsmasq.conf <<EOF
-interface=wlan0
-dhcp-range=10.0.0.2,10.0.0.5,255.255.255.0,12h
-EOF
-
-cat > /etc/hostapd/hostapd.conf <<EOF
-interface=wlan0
+tee -a /etc/hostapd/hostapd.conf << END
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=0
+interface=ap0
+driver=nl80211
+ssid=RocketCam
 hw_mode=g
-channel=10
+channel=11
+wmm_enabled=0
+macaddr_acl=0
 auth_algs=1
 wpa=2
+wpa_passphrase=rocketcam
 wpa_key_mgmt=WPA-PSK
-wpa_pairwise=CCMP
+wpa_pairwise=TKIP CCMP
 rsn_pairwise=CCMP
-wpa_passphrase=$APPASS
-ssid=$APSSID
-ieee80211n=1
-wmm_enabled=1
-ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
-EOF
+END
 
-sed -i -- 's/allow-hotplug wlan0//g' /etc/network/interfaces
-sed -i -- 's/iface wlan0 inet manual//g' /etc/network/interfaces
-sed -i -- 's/    wpa-conf \/etc\/wpa_supplicant\/wpa_supplicant.conf//g' /etc/network/interfaces
-sed -i -- 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
+echo 'DAEMON_CONF="/etc/hostapd/hostapd.conf"' > /etc/default/hostapd
 
-cat >> /etc/network/interfaces <<EOF
-# Added by rPi Access Point Setup
-allow-hotplug wlan0
-iface wlan0 inet static
-	address 10.0.0.1
-	netmask 255.255.255.0
-	network 10.0.0.0
-	broadcast 10.0.0.255
+tee -a /etc/dnsmasq.conf << END
 
-EOF
+auto lo
+auto ap0
+auto wlan0
+iface lo inet loopback
 
-echo "denyinterfaces wlan0" >> /etc/dhcpcd.conf
-
-systemctl enable hostapd
-systemctl enable dnsmasq
-
-sudo service hostapd start
-sudo service dnsmasq start
-
-echo "All done! Please reboot"
+allow-hotplug ap0
+iface ap0 inet static
+    address 192.168.10.1
+    netmask 255.255.255.0
+    hostapd /etc/hostapd/hostapd.conf
+END

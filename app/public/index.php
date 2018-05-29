@@ -30,9 +30,6 @@ require __DIR__ . '/../src/state.php';
 //Set up the helper
 require __DIR__ . '/../src/Helper.php';
 
-//Set up the Rasberrypi controls
-require __DIR__ . '/../src/Raspi.php';
-
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';
 

@@ -9,7 +9,7 @@
  * 
  **/
 
-$file = file_get_contents(__DIR__ . "/../session.json");
+$file = @file_get_contents(__DIR__ . "/../session.json");
 $GLOBALS["SETTINGS"] = $file ? json_decode($file, true) : [];
 
 if( !isset($GLOBALS["SETTINGS"]["state"]) ) {
