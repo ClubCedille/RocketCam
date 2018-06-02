@@ -3,20 +3,21 @@
 if [ -z $1 ] 
 then 
   echo "Default hostname is cedille";
-  echo "Usage: sudo configure_pi.sh [password] [hostname]";
+  echo "Usage: sudo configure_pi.sh [password] [hostname] [SSID]";
   exit;
 fi
 
 PASS=$1
 HOSTNAME=${2:-cedille} 
+SSID=${3:-RocketCam} 
 
 #The following line will configure the raspiberry pi 
 raspi-config nonint do_hostname $HOSTNAME
 raspi-config nonint do_camera 0 #Enable the camera
 (echo $PASS ; echo $PASS ; echo $PASS) | passwd pi
 
-apt-get update -y
-apt-get install php -y
+#apt-get update -y
+apt-get install php inotify-tools -y
 
 a2enmod rewrite
 
@@ -47,5 +48,7 @@ mv app /var/www/html
 chmod -R 777 /var/www/html
 chown -R www-data:www-data /var/www/html
 
-bash ./install/access-point.sh rocket-cam $PASS
+mv /home/pi/install/cron_register_watcher /etc/cron.d/watcher
+
+bash ./install/access-point.sh $SSID $PASS
 

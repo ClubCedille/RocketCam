@@ -17,11 +17,13 @@ class Helper {
   }
   public static function takePicture(){
     $timestamp = time();
-    $out = shell_exec("/opt/vc/bin/raspistill -q 30 -w 480 -h 320 -o /var/www/html/picture/picture-$timestamp.jpg");
-    $GLOBALS["SETTINGS"]["state"]["stdout"] = base64_encode(file_get_contents("/var/www/html/picture/picture-$timestamp.jpg"));
+    $out = touch("/var/www/html/snapshot");
+    sleep(2);
+    $GLOBALS["SETTINGS"]["state"]["stdout"] = base64_encode(file_get_contents("/var/www/html/picture/picture.jpg"));
   }
   public static function recordVideo(){
-    shell_exec("/opt/vc/bin/raspivid -t 0 -w 1280 -h 720 -hf -ih -fps 60 -o /var/www/html/recording/video-".time().".h264 | echo 'test' & disown");
+    touch("/var/www/html/start_video");
+    sleep(2);
     $GLOBALS["SETTINGS"]["pid"] = Helper::getPID();
     $GLOBALS["SETTINGS"]["state"]["running"] = Helper::is_process_running($GLOBALS["SETTINGS"]["pid"]);
   }
