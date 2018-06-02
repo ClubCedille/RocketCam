@@ -23,6 +23,8 @@ $app->get('/picture[/{id_camera}]', function (Request $request, Response $respon
     $cameraId = $args['id_camera']; 
     Helper::takePicture();
     $response->getBody()->write( Helper::getJSONState() );
+    //Remove the base64 encode of the image before saving the state
+    $GLOBALS["SETTINGS"]["state"]["stdout"] = "";
     return $response;
 });
 

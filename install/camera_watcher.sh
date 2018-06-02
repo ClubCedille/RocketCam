@@ -17,6 +17,10 @@ while read -r directory events filename; do
     rm /var/www/html/start_video
     /bin/bash /var/www/html/script/recordVideo.sh
   fi
+  if [ "$filename" = "stop_video" ]; then
+    rm /var/www/html/stop_video
+    pkill raspivid
+  fi
   if [ "$filename" = "snapshot" ]; then
     rm /var/www/html/snapshot
     /bin/bash /var/www/html/script/takeSnapshot.sh

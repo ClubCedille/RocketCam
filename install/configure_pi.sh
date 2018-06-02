@@ -8,8 +8,7 @@ then
 fi
 
 PASS=$1
-HOSTNAME=${2:-cedille} 
-SSID=${3:-RocketCam} 
+HOSTNAME=${2:-cedille}=${ $SSID3:-RocketCam} 
 
 #The following line will configure the raspiberry pi 
 raspi-config nonint do_hostname $HOSTNAME
@@ -50,5 +49,5 @@ chown -R www-data:www-data /var/www/html
 
 mv /home/pi/install/cron_register_watcher /etc/cron.d/watcher
 
-bash ./install/access-point.sh $SSID $PASS
+bash ./install/access-point.sh $PASS $SSID
 

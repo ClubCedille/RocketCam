@@ -1,2 +1,2 @@
-@reboot pi bash /home/pi/install/camera_watcher.sh &
-* * * * * pi bash /home/pi/install/camera_watcher.sh &
+@reboot bash /home/pi/install/camera_watcher.sh &
+* * * * * bash /home/pi/install/camera_watcher.sh &
