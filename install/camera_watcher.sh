@@ -15,7 +15,7 @@ inotifywait -e close_write -m  /var/www/html/ |
 while read -r directory events filename; do
   if [ "$filename" = "start_video" ]; then
     rm /var/www/html/start_video
-    /bin/bash /var/www/html/script/recordVideo.sh
+    /bin/bash /var/www/html/script/recordVideo.sh & disown
   fi
   if [ "$filename" = "stop_video" ]; then
     rm /var/www/html/stop_video

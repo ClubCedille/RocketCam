@@ -28,6 +28,7 @@ class Helper {
   }
   public static function stopVideo(){
     touch("/var/www/html/stop_video");
+    sleep(2);
     Helper::setIsRunning();
   }
  
