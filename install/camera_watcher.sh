@@ -19,7 +19,7 @@ while read -r directory events filename; do
   fi
   if [ "$filename" = "stop_video" ]; then
     rm /var/www/html/stop_video
-    pkill raspivid
+    /bin/bash /var/www/html/script/stopVideo.sh
   fi
   if [ "$filename" = "snapshot" ]; then
     rm /var/www/html/snapshot

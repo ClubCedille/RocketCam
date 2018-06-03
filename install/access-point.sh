@@ -1,24 +1,10 @@
 #!/bin/bash
-#
-# This version uses September 2017 august stretch image, please use this image
-#
 
-if [ "$EUID" -ne 0 ]
-	then echo "Must be root"
-	exit
-fi
-
-if [[ $# -lt 1 ]]; 
-	then echo "You need to pass a password!"
-	echo "Usage:"
-	echo "sudo $0 yourChosenPassword [apName]"
-	exit
-fi
 
 APPASS="$1"
 APSSID="$2"
 
-apt-get install hostapd dnsmasq -y
+apt-get install hostapd dnsmasq -yq
 
 cat > /etc/dnsmasq.conf <<EOF
 interface=wlan0
@@ -47,7 +33,7 @@ sed -i -- 's/    wpa-conf \/etc\/wpa_supplicant\/wpa_supplicant.conf//g' /etc/ne
 sed -i -- 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
 
 cat >> /etc/network/interfaces <<EOF
-# Added by rPi Access Point Setup
+# Added by RocketCam
 allow-hotplug wlan0
 iface wlan0 inet static
 	address 10.0.0.1
