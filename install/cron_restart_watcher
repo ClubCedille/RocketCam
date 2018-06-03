@@ -1,1 +1,2 @@
-* * * * * pi bash /home/pi/install/camera_watcher.sh &
+* * * * * pi /bin/bash /home/pi/install/camera_watcher.sh &
+

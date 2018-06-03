@@ -18,3 +18,5 @@ echo "Done"
 echo "Installing crons"
 mv /home/pi/install/cron_register_watcher /etc/cron.d/cron_register_watcher
 mv /home/pi/install/cron_restart_watcher /etc/cron.d/cron_restart_watcher
+chown root:root /etc/cron.d/cron_register_watcher
+chown root:root /etc/cron.d/cron_restart_watcher
