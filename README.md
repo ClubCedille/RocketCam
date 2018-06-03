@@ -18,7 +18,7 @@ This software was tested with 2018-04-18-raspbian-stretch-lite.
   - You might have to configure your IPV4 configuration to "Shared with other computer"
 - run `arp` or `arp -n` to find the pi hostname/ip
 - run `ssh pi@[$HOSTNAME].local` or `ssh pi@[IP]` the password should be `raspberry`
-- Now you should be connected to a bash shell on the pi. Run `sudo bash ./install/configure_pi.sh [password] [hostname] [ssid]`
+- Now you should be connected to a bash shell on the pi. Run `sudo bash ./install/configure_pi.sh [password] [slave or master] [hostname] [SSID]`
 - Reboot the pi
 - You are done ! 
 
