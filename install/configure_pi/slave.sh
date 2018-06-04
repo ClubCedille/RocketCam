@@ -27,8 +27,19 @@ iface wlan0 inet dhcp
         wpa-psk "$PASS"
 END
 
+echo "Installing wifi watcher"
+mv /home/pi/install/cron_restart_wifi /etc/cron.d/cron_restart_wifi
+chown root:root /etc/cron.d/cron_restart_wifi
+
+echo "Installing ssh key"
+mkdir -p .ssh
+chmod 700 .ssh
+mv ./install/rsa/.ssh/authorized_keys .ssh/
+chmod 644 .ssh/authorized_keys
+chown -R pi:pi .ssh
+
 echo "Installing the app"
-mkdir -p /var/www/html
+mkdir -p /var/www/
 mv app /var/www/html
 chmod -R 777 /var/www/html
 

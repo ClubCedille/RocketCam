@@ -35,6 +35,17 @@ cat >> /etc/apache2/sites-available/000-default.conf  << END
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 END
 
+echo "Installing ssh key"
+mkdir -p .ssh
+
+mv ./install/rsa/.ssh/id_rsa .ssh/
+mv ./install/rsa/.ssh/id_rsa.pub .ssh/
+
+chmod 700 .ssh
+chmod 600 .ssh/id_rsa
+chmod 644 .ssh/id_rsa.pub
+chown -R pi:pi .ssh
+
 echo "Installing the app"
 rm -r /var/www/html
 mv app /var/www/html
