@@ -1,0 +1,1 @@
+@reboot pi /bin/bash /home/pi/rocket-cam/script/clean_env.sh

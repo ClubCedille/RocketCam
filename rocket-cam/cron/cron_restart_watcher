@@ -1,0 +1,1 @@
+* * * * * pi /bin/bash /home/pi/rocket-cam/watcher/camera_watcher.sh &

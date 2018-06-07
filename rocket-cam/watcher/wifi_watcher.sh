@@ -4,7 +4,8 @@
 #ping master
 ping -c2 -W2 10.0.0.1 > /dev/null
 
-#Check for ping error
+#Check for ping error then restart the interface if we don't find the master
+#This will make the pi retry to connect
 if [ $? != 0 ]
 then
     ifdown --force wlan0

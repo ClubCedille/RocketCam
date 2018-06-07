@@ -5,7 +5,7 @@ TYPE=$2
 HOSTNAME=${3:-cedille}
 SSID=${4:-RocketCam} 
 
-bash ./install/configure_pi/common.sh $PASS $TYPE $HOSTNAME $SSID
+bash ./rocket-cam/configure_pi/common.sh $PASS $TYPE $HOSTNAME $SSID
 
 echo "Installing inotify-tools"
 apt-get install inotify-tools -yqq
@@ -28,13 +28,13 @@ iface wlan0 inet dhcp
 END
 
 echo "Installing wifi watcher"
-mv /home/pi/install/cron_restart_wifi /etc/cron.d/cron_restart_wifi
+mv /home/pi/rocket-cam/cron/cron_restart_wifi /etc/cron.d/cron_restart_wifi
 chown root:root /etc/cron.d/cron_restart_wifi
 
 echo "Installing ssh key"
 mkdir -p .ssh
 chmod 700 .ssh
-mv ./install/rsa/.ssh/authorized_keys .ssh/
+mv ./rocket-cam/rsa/.ssh/authorized_keys .ssh/
 chmod 644 .ssh/authorized_keys
 chown -R pi:pi .ssh
 

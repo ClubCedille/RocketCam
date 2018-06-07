@@ -1,4 +1,4 @@
-### Liste des commandes possible via raspi-config non interactif 
+### List of command to configure the raspberry pi zero W with raspbian.
 ```
 #https://www.raspberrypi.org/forums/viewtopic.php?t=21632
 #https://github.com/raspberrypi-ui/rc_gui/blob/master/src/rc_gui.c#L23-L70

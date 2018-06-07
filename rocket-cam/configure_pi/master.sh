@@ -5,7 +5,7 @@ TYPE=$2
 HOSTNAME=${3:-cedille}
 SSID=${4:-RocketCam} 
 
-bash ./install/configure_pi/common.sh $PASS $TYPE $HOSTNAME $SSID
+bash ./rocket-cam/configure_pi/common.sh $PASS $TYPE $HOSTNAME $SSID
 
 echo "Installing php, apache and inotify-tools"
 apt-get install php inotify-tools -yqq
@@ -38,8 +38,8 @@ END
 echo "Installing ssh key"
 mkdir -p .ssh
 
-mv ./install/rsa/.ssh/id_rsa .ssh/
-mv ./install/rsa/.ssh/id_rsa.pub .ssh/
+mv ./rocket-cam/rsa/.ssh/id_rsa .ssh/
+mv ./rocket-cam/rsa/.ssh/id_rsa.pub .ssh/
 
 chmod 700 .ssh
 chmod 600 .ssh/id_rsa
@@ -53,7 +53,7 @@ chmod -R 777 /var/www/html
 chown -R www-data:www-data /var/www/html
 
 echo "Configuring Access Point"
-bash ./install/access-point.sh $PASS $SSID
+bash ./rocket-cam/configure_pi/access-point.sh $PASS $SSID
 
 echo "Installation completed! Please reboot."
 

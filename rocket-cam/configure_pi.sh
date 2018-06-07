@@ -14,7 +14,7 @@ SSID=${4:-RocketCam}
 
 if [ $TYPE = "master" ] 
 then
-  bash ./install/configure_pi/master.sh $PASS $TYPE $HOSTNAME $SSID
+  bash ./rocket-cam/configure_pi/master.sh $PASS $TYPE $HOSTNAME $SSID
 else
-  bash ./install/configure_pi/slave.sh $PASS $TYPE $HOSTNAME $SSID
+  bash ./rocket-cam/configure_pi/slave.sh $PASS $TYPE $HOSTNAME $SSID
 fi
