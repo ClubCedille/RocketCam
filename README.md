@@ -1,20 +1,20 @@
 # Rocket-cam
 
-The goal of this project was to transform raspberry pi zero w into a camera system that is 
+The goal of this project was to a transform raspberry pi zero w into a camera system that is 
 accessible remotely.
 
 This software allow you to control many raspberry pi zero W from a single master PI.
-Once you've sent command to the master, the slave will do the same.
+Once you've sent a command to the master PI, the slaves will do the same.
 
 The start and stop command will be duplicated on all the pi.
 The picture command will only work for the master pi.
 
-This project have been build for two student club in Montréal in order to film the fly of a rocket.
+This project have been build for two student club in Montréal in order to record the flight of a rocket.
 We needed to be able to control when to start the recording and to syncronize four camera.
 
 ## Installation:
 
-- You'll need to flash the SD card with raspbian strech lite.
+- You will need to flash the SD card with raspbian strech lite.
 - Run the script ./rocket-cam/configure_boot.sh from the boot directory.
   - Usage: `bash [PATH TO INSTALL]/rocket-cam/configure_boot.sh`
   - This will configure the pi zero W to work with OTG modes [see this](https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a) for more details.
@@ -32,9 +32,9 @@ We needed to be able to control when to start the recording and to syncronize fo
 ## Accessing the pi
 
 Once installed, power up the raspberry pi and wait ~30-60 secondes.
-You should see in your wifi a new connection with the SSID you chose while installing it.
+You should see in your wifi a new connection with the SSID you chosed while installing it.
 
-Connect to that wifi and you should be able to access to `http://10.0.0.1`.
+Connect to that wifi and you should be able to access `http://10.0.0.1`.
 
 
 PS:
