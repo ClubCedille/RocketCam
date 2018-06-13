@@ -1,6 +1,6 @@
 # Usefull resources we used to build the project
 
-### Pointed me to OTG and Headless information and helped me understand how to build an access point
+### Pointed me to OTG and Headless information and also helped me understand how to build an access point
 https://blog.thewalr.us/2017/09/26/raspberry-pi-zero-w-simultaneous-ap-and-managed-mode-wifi/
 
 ### OTG mode
