@@ -1,6 +1,6 @@
 # Rocket-cam
 
-The goal of this project was to a transform raspberry pi zero w into a camera system that is 
+The goal of this project is to transform a raspberry pi zero w into a camera system that is 
 accessible remotely.
 
 This software allow you to control many raspberry pi zero W from a single master PI.
