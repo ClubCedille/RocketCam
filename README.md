@@ -13,6 +13,7 @@ This project have been build for two student club in Montréal in order to recor
 We needed to be able to control when to start the recording and to syncronize four camera.
 
 Here's the result:
+
 ![Amarok flight](amarok.gif)
 
 
