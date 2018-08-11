@@ -12,6 +12,10 @@ The picture command will only work for the master pi.
 This project have been build for two student club in Montréal in order to record the flight of a rocket.
 We needed to be able to control when to start the recording and to syncronize four camera.
 
+Here's the result:
+![Amarok flight](amarok.gif)
+
+
 ## Installation:
 
 - You will need to flash the SD card with raspbian strech lite.
